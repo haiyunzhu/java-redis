@@ -28,6 +28,7 @@ public class DistributedRedisLockTest {
             new Thread(() -> {
                 String uuid = UUID.randomUUID().toString();
                 String key = "name";
+                //获取jedis
                 Jedis jedis = jedisPool.getResource();
                 String value = "helloRedis";
                 Boolean lock = RedisUtils.lock(jedis, key, value, 1);
@@ -41,6 +42,7 @@ public class DistributedRedisLockTest {
                 }catch (Exception e) {
 
                 }finally {
+                    //释放锁
                     RedisUtils.unlock(jedis,key,value);
                     countDownLatch.countDown();
                 }

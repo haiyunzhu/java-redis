@@ -16,6 +16,7 @@ public class RedisUtils {
      * @return
      */
     public static Boolean lock(Jedis jedis,String key,String value,int seconds) {
+        //原子操作:判断key是否存在,保存key-value,设置超时时间
         String result = jedis.set(key, value, "NX", "EX", seconds);
         return StringUtils.isNotBlank(result) && "OK".equals(result);
     }
