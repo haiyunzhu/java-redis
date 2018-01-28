@@ -13,4 +13,33 @@ public interface RedisCacheService {
      * @param expiration
      */
     void putObject(String key,Object value,int expiration);
+
+    /**
+     * 从缓存中获取对象
+     * @param key
+     * @return
+     */
+    Object pullObject(String key);
+
+    /**
+     * 给缓存对象设置过期秒数
+     * @param key
+     * @param expireSecond
+     * @return
+     */
+    boolean expire(String key,int expireSecond);
+
+    /**
+     * 获取缓存对象设置的过期秒数
+     * @param key
+     * @return
+     */
+    Long ttl(String key);
+
+    /**
+     * 从缓存中删除对象
+     * @param key
+     * @return
+     */
+    boolean delObject(String key);
 }
