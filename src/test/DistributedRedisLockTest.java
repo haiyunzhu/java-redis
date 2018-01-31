@@ -1,7 +1,7 @@
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import utils.RedisUtils;
+import com.redis.test.utils.RedisUtils;
 
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;

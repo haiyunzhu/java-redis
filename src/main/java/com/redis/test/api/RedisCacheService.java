@@ -1,4 +1,4 @@
-package api;
+package com.redis.test.api;
 
 /**
  * redis缓存服务接口

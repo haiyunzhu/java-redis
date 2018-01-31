@@ -1,5 +1,6 @@
-package entity;
+package com.redis.test.entity;
 
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -8,6 +9,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * 从DistributedRedisLockTest演化而来
  * Created by zhuhaiyun on 2018/1/28.
  */
+@Component
 public class RedisConnection {
     /**
      * jedis连接池配置信息
@@ -18,8 +20,8 @@ public class RedisConnection {
      * jedis连接池
      */
     private JedisPool jedisPool;
-    private String host;
-    private Integer port;
+    private String host = "127.0.0.1";
+    private Integer port = 6379;
 
     /**
      * 建立连接
@@ -39,7 +41,7 @@ public class RedisConnection {
     }
 
     public void setJedisPoolConfig(JedisPoolConfig jedisPoolConfig) {
-        this.jedisPoolConfig = jedisPoolConfig;
+        this.jedisPoolConfig = new JedisPoolConfig();
     }
 
     public JedisPool getJedisPool() {
@@ -47,7 +49,7 @@ public class RedisConnection {
     }
 
     public void setJedisPool(JedisPool jedisPool) {
-        this.jedisPool = jedisPool;
+        this.jedisPool = new JedisPool(new JedisPoolConfig(),host,port);
     }
 
     public String getHost() {
@@ -63,6 +65,13 @@ public class RedisConnection {
     }
 
     public void setPort(Integer port) {
+
         this.port = 6379;
     }
+
+//    public RedisConnection(String host, Integer port) {
+//        buildConnection();
+//        this.host = host;
+//        this.port = port;
+//    }
 }

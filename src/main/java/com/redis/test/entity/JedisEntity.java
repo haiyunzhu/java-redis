@@ -1,4 +1,4 @@
-package entity;
+package com.redis.test.entity;
 
 /**
  * Jedis实体类

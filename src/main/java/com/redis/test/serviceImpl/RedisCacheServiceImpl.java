@@ -1,13 +1,15 @@
-package serviceImpl;
+package com.redis.test.serviceImpl;
 
-import api.RedisCacheService;
-import entity.RedisConnection;
+import com.redis.test.api.RedisCacheService;
+import com.redis.test.entity.RedisConnection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 
 /**
  * Created by zhuhaiyun on 2018/1/24.
  */
+@Component
 public class RedisCacheServiceImpl implements RedisCacheService {
 
     @Autowired
@@ -44,4 +46,5 @@ public class RedisCacheServiceImpl implements RedisCacheService {
         Jedis jedis = redisConnection.getJedis();
         return jedis.del(key) > 0;
     }
+
 }

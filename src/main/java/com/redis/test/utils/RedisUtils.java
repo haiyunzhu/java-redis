@@ -1,4 +1,4 @@
-package utils;
+package com.redis.test.utils;
 
 import org.apache.commons.lang.StringUtils;
 import redis.clients.jedis.Jedis;
