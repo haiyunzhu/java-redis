@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class RedisCacheTest {
     // zhuhaiyun-下午5:40 TODO: jedis cache test
     @Autowired
+    // zhuhaiyun-下午11:36 TODO: Autowired如何初始化  为什么没有调用set方法
     private RedisCacheService redisCacheService;
 
     @Test
