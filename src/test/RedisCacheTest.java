@@ -13,20 +13,29 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
         locations = {"classpath*:/config/spring/local/appcontext-*.xml"
         })
 public class RedisCacheTest {
-    // zhuhaiyun-下午5:40 TODO: jedis cache test
     @Autowired
     // zhuhaiyun-下午11:36 TODO: Autowired如何初始化  为什么没有调用set方法
     private RedisCacheService redisCacheService;
 
+    /**
+     * 测试基于k-value数据的缓存
+     */
     @Test
     public void testCache() {
         String key = "name";
         String value = "kivi";
         //expiration超时时间设置为1s  测试过程中就失效了 建议时间设长点
-        redisCacheService.putObject(key,value,100);
+        redisCacheService.putObject(key,100,value);
         // zhuhaiyun-下午8:39 TODO: 将键值放入缓存中
         String cacheValue = (String)redisCacheService.pullObject(key);
         System.out.println(value + "" + cacheValue);
     }
 
+    /**
+     * 测试基于hash数据的缓存
+     */
+    @Test
+    public void testHashCache() {
+
+    }
 }

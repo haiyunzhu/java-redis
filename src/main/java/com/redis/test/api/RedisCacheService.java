@@ -12,7 +12,9 @@ public interface RedisCacheService {
      * @param value
      * @param expiration
      */
-    void putObject(String key,Object value,int expiration);
+    void putObject(String key,int expiration,String... value);
+
+
 
     /**
      * 从缓存中获取对象
@@ -42,4 +44,6 @@ public interface RedisCacheService {
      * @return
      */
     boolean delObject(String key);
+
+    void putHash(String key,String field,String value,int expiration);
 }

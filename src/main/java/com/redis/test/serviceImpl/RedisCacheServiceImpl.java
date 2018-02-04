@@ -16,12 +16,16 @@ public class RedisCacheServiceImpl implements RedisCacheService {
     private RedisConnection redisConnection;
 
     @Override
-    public void putObject(String key, Object value, int expiration) {
+    public void putObject(String key, int expiration, String... value) {
         Jedis jedis = redisConnection.getJedis();
+        String[] values = value;
         if (expiration > 0) {
-            jedis.setex(key, expiration, value.toString());
+            //将value关联到key,并设置key的生存时间
+            jedis.setex(key, expiration, values[0]);
         }
     }
+
+
 
     @Override
     public Object pullObject(String key) {
@@ -47,4 +51,14 @@ public class RedisCacheServiceImpl implements RedisCacheService {
         return jedis.del(key) > 0;
     }
 
+    @Override
+    public void putHash(String key, String field, String value, int expiration) {
+        Jedis jedis = redisConnection.getJedis();
+        jedis.hsetnx(key,field,value);
+        //针对key设置过期时间
+        jedis.expire(key,expiration);
+        // zhuhaiyun-下午6:50 TODO: 
+    }
+
+    
 }
