@@ -52,13 +52,14 @@ public class RedisCacheServiceImpl implements RedisCacheService {
     }
 
     @Override
-    public void putHash(String key, String field, String value, int expiration) {
+    public void putHash(String key, String field, String value) {
         Jedis jedis = redisConnection.getJedis();
-        jedis.hsetnx(key,field,value);
-        //针对key设置过期时间
-        jedis.expire(key,expiration);
-        // zhuhaiyun-下午6:50 TODO: 
+        jedis.hset(key,field,value);
     }
 
-    
+    @Override
+    public String hget(String key, String field) {
+        Jedis jedis = redisConnection.getJedis();
+        return jedis.hget(key, field);
+    }
 }

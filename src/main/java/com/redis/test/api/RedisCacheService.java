@@ -45,5 +45,13 @@ public interface RedisCacheService {
      */
     boolean delObject(String key);
 
-    void putHash(String key,String field,String value,int expiration);
+    void putHash(String key,String field,String value);
+
+    /**
+     * 根据key获取hash值
+     * @param key
+     * @param field
+     * @return
+     */
+    String hget(String key,String field);
 }

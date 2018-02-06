@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static com.sun.corba.se.spi.activation.IIOP_CLEAR_TEXT.value;
+
 /**
  * Created by zhuhaiyun on 2018/1/23.
  */
@@ -25,10 +27,10 @@ public class RedisCacheTest {
         String key = "name";
         String value = "kivi";
         //expiration超时时间设置为1s  测试过程中就失效了 建议时间设长点
-        redisCacheService.putObject(key,100,value);
+        redisCacheService.putObject(key, 1000, value);
         // zhuhaiyun-下午8:39 TODO: 将键值放入缓存中
-        String cacheValue = (String)redisCacheService.pullObject(key);
-        System.out.println(value + "" + cacheValue);
+        String cacheValue = (String) redisCacheService.pullObject(key);
+        System.out.println(value + "\n" + cacheValue);
     }
 
     /**
@@ -36,6 +38,36 @@ public class RedisCacheTest {
      */
     @Test
     public void testHashCache() {
+        String key = "hash";
+        //===
+        String field1 = "sex";
+        String value1 = "male";
+        //===
+        String field2 = "age";
+        String value2 = "18";
+//        String value01 = "female";
+        redisCacheService.putHash(key, field1, value1);
+        redisCacheService.putHash(key, field2, value2);
+        //设置过期时间
+        redisCacheService.expire(key, 1000);
+        String hvalue1 = redisCacheService.hget(key, field1);
+        System.out.println("value1:" + value1 + "\nhvalue:" + hvalue1);
 
     }
+
+    /**
+     * 测试删除缓存
+     */
+    @Test
+    public void testDelCache() {
+        boolean hash = redisCacheService.delObject("hash");
+        System.out.println(hash);
+    }
+
+    @Test
+    public void testTtlCahce() {
+        Long name = redisCacheService.ttl("name");
+        System.out.println("expire time:"+name);
+    }
+
 }
