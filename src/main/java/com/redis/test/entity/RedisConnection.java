@@ -30,6 +30,7 @@ public class RedisConnection {
         jedisPool = new JedisPool(new JedisPoolConfig(),host,port);
     }
 
+
     public Jedis getJedis() {
         buildConnection();
         Jedis jedis = jedisPool.getResource();
