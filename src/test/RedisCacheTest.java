@@ -64,6 +64,7 @@ public class RedisCacheTest {
         System.out.println(hash);
     }
 
+
     @Test
     public void testTtlCahce() {
         Long name = redisCacheService.ttl("name");
